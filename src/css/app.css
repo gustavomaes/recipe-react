@@ -1,0 +1,19 @@
+.cover-image-wrapper{
+    position:relative;
+}
+
+
+.cover-image-wrapper h1{
+    position:absolute; 
+    width:100%;
+    top:40%;
+    font-size: 250%;
+    font-family:"Lobster";
+    text-align:center;
+    color: #fff;
+}
+
+
+.user-by{
+    color: orange;
+}
