@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { Container, Header, Card, Grid, GridRow } from 'semantic-ui-react'
+import { Container, Header, Card } from 'semantic-ui-react'
 
 import Headbar from './elements/Headbar';
 import Cover from './elements/Cover';
-import RecipeCard from './elements/RecipeCard';
+import Recipe from './elements/Recipe';
 import Footer from './elements/Footer';
 
 const HomePage = () => (
@@ -16,13 +16,13 @@ const HomePage = () => (
             <Header as='h1'>Todas Receitas</Header>
             <br />
             <Card.Group itemsPerRow={3}>
-                <RecipeCard />
-                <RecipeCard />
-                <RecipeCard />
-                <RecipeCard />
-                <RecipeCard />
-                <RecipeCard />
-                <RecipeCard />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
+                <Recipe />
 
             </Card.Group>
 

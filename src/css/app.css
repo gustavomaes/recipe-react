@@ -2,18 +2,38 @@
     position:relative;
 }
 
-
 .cover-image-wrapper h1{
     position:absolute; 
     width:100%;
     top:40%;
     font-size: 250%;
-    font-family:"Lobster";
+    font-family:"Molengo";
     text-align:center;
+    text-transform: uppercase;
     color: #fff;
 }
 
-
 .user-by{
     color: orange;
+}
+
+.login-form {
+      height: 100%;
+}
+
+.input-fill {
+    width: 100%;
+}
+
+.img-container {
+	width: 400px;
+	display: inline-block;
+	overflow: hidden;
+}
+.img-container img {
+	width: 100%;
+}
+
+.grid-center {
+    height: 100%;  
 }

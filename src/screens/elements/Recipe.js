@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Divider, Header, Image, List, Button, Card, Icon, Modal } from 'semantic-ui-react'
+import { Divider, Header, Image, List, Card, Icon, Modal, Button } from 'semantic-ui-react'
 
-const RecipeCard = () => {
+const Recipe = () => {
     return (
         <Modal trigger={
             <Card>
@@ -15,7 +15,6 @@ const RecipeCard = () => {
                     </Card.Description>
                 </Card.Content>
             </Card>
-
         }>
             <Modal.Header>POLENTA FRITA CROCANTE</Modal.Header>
             <Modal.Content scrolling>
@@ -66,9 +65,9 @@ const RecipeCard = () => {
 
                 </Modal.Description>
             </Modal.Content>
-            
+
         </Modal>
     )
 }
 
-export default RecipeCard
+export default Recipe
