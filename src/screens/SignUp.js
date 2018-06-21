@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 import logoImg from '../resources/logo.png'
@@ -18,7 +19,7 @@ const SignUp = () => {
             <Grid className='grid-center' textAlign='center' verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 550 }}>
                     <Header as='h2' color='orange' textAlign='center'>
-                        <Image src={logoImg} /> Cadastro
+                        <Image as={Link} to='/' src={logoImg} /> Cadastro
                     </Header>
                     <Form size='large'>
                         <Segment stacked>
@@ -28,7 +29,7 @@ const SignUp = () => {
                             <Button color='orange' fluid size='large'>Entrar</Button>
                         </Segment>
                     </Form>
-                    <Message> Já possui uma conta? <a href='#'>Entrar</a> </Message>
+                    <Message> Já possui uma conta? <Link to='/login'>Entrar</Link> </Message>
                 </Grid.Column>
             </Grid>
         </div>
