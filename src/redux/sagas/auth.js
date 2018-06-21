@@ -14,7 +14,6 @@ export function* auth() {
                     'x-access-token': token
                 }
             })
-            console.log(user)
             yield put(ActionCreators.authSuccess(user.data))
         } catch (e) {
             yield put(ActionCreators.authFailure('invalid token'))
@@ -45,7 +44,6 @@ export function* login(action) {
 }
 
 export function* destroyAuth() {
-    console.log('destroy')
     localStorage.removeItem('token')
 
     yield put(ActionCreators.destroyAuthSuccess())

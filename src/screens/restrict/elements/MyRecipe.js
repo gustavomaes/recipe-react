@@ -1,24 +1,25 @@
 import React from 'react'
 
 import { Header, Image, Card, Button, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
-const MyRecipe = () => {
+const MyRecipe = ({ recipe }) => {
     return (
         <Card>
-            <Image src='https://picsum.photos/500/300/?random' />
+            <Image src={recipe.photoUrl} />
             <Card.Content>
-                <Card.Header>Receita 01</Card.Header>
+                <Card.Header>{recipe.name}</Card.Header>
             </Card.Content>
             <Card.Content extra>
-                <a>
+                <Link to='/restrict/new'>
                     <Icon name='edit' />
                     Editar
-                </a>
+                </Link>
                 <br />
-                <a>
+                <Link to='/restrict/new'>
                     <Icon name='delete' />
                     Excluir
-                </a>
+                </Link>
             </Card.Content>
         </Card>
     )

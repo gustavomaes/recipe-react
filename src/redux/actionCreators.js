@@ -5,7 +5,7 @@ export const {
     Creators
 } = createActions({
     //Recipes
-    getRecipesRequest: null,
+    getRecipesRequest: ['filter'],
     getRecipesSuccess: ['recipes'],
     getRecipesFailure: ['error'],
 

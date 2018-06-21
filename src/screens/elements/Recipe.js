@@ -30,13 +30,13 @@ const Recipe = ({ recipe }) => {
                     <Divider />
                     <Header>Ingredientes</Header>
                     <List>
-                        {recipe.ingredients.map(i => <Ingredient item={i}/>)}
+                        {recipe.ingredients.map((i, position) => <Ingredient item={i} key={position}/>)}
                     </List>
 
                     <Divider />
                     <Header>Modo de Preparo</Header>
                     <List ordered>
-                        {recipe.preparation.map((i) => <Preparation item={i} />)}
+                        {recipe.preparation.map((i, position) => <Preparation item={i} key={position}/>)}
                     </List>
 
                 </Modal.Description>

@@ -2,17 +2,33 @@ import React, { Component } from 'react'
 
 import { Container, Header, Form, Segment, Button, Divider, Input, List, Icon } from 'semantic-ui-react'
 
-import Headbar from './elements/Headbar';
-import Footer from './elements/Footer';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 class NewRecipe extends Component {
 
+
+
     constructor(props) {
         super(props)
-        this.state = {
-            file: null
-        }
+
+
         this.handleChange = this.handleChange.bind(this)
+    }
+    state = {
+        src: null,
+        crop: {
+            x: 10,
+            y: 10,
+            width: 30.72,
+            height: 17.28,
+            aspect: 16 / 9
+        }
+
+    }
+
+    onCropChange = (crop) => {
+        this.setState({ crop });
     }
 
     handleChange(event) {
@@ -21,10 +37,48 @@ class NewRecipe extends Component {
         })
     }
 
+    onSelectFile = e => {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader()
+            reader.addEventListener(
+                'load',
+                () =>
+                    this.setState({
+                        src: reader.result,
+                    }),
+                false
+            )
+            reader.readAsDataURL(e.target.files[0])
+        }
+    }
+
+
+    getCroppedImg(image, pixelCrop, fileName) {
+
+        const canvas = document.createElement('canvas');
+        canvas.width = pixelCrop.width;
+        canvas.height = pixelCrop.height;
+        const ctx = canvas.getContext('2d');
+
+        ctx.drawImage(
+            image,
+            pixelCrop.x,
+            pixelCrop.y,
+            pixelCrop.width,
+            pixelCrop.height,
+            0,
+            0,
+            pixelCrop.width,
+            pixelCrop.height
+        );
+
+        // As Base64 string
+        return new Promise((resolve, reject) => canvas.toDataURL('image/jpeg'))
+    }
+
     render() {
         return (
             <div>
-                <Headbar />
                 <Container>
                     <br />
                     <br />
@@ -34,10 +88,12 @@ class NewRecipe extends Component {
                     <Form>
                         <Form.Field>
                             <label>Foto</label>
-                            <input type='file' accept="image/x-png,image/gif,image/jpeg" onChange={this.handleChange}/>
+                            {/*<input type='file' accept="image/x-png,image/gif,image/jpeg" onChange={this.handleChange} />*/}
+                            <input type="file" onChange={this.onSelectFile} />
                             <br />
-                            <img className='img-container' src={this.state.file}/>
-
+                            {this.state.src && (
+                                <ReactCrop src={this.state.src} crop={this.state.crop} onChange={this.onCropChange} />
+                            )}
                         </Form.Field>
 
                         <Form.Field>
@@ -54,7 +110,12 @@ class NewRecipe extends Component {
                             <input type='number' />
                         </Form.Field>
 
-                        <Button color='orange'>Criar</Button>
+                        <Button color='orange' onClick={() => {
+                            // console.log(this.state.src)
+                            const croppedImg = this.getCroppedImg(this.state.src, this.state.crop, 'returnedFileName')
+                            .then( console.log('sdasd'));
+
+                        }}>Criar</Button>
                     </Form>
 
                     <br />
@@ -103,7 +164,6 @@ class NewRecipe extends Component {
                     </List>
 
                 </Container>
-                <Footer />
             </div>
         )
     }

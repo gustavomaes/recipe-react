@@ -10,9 +10,7 @@ import Home from './screens/Home';
 import Restrict from './screens/restrict/index';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
-import MyRecipes from './screens/MyRecipes';
 import MyAccount from './screens/MyAccount';
-import NewRecipe from './screens/NewRecipe';
 import EditRecipe from './screens/EditRecipe';
 import EditUser from './screens/admin/EditUser';
 import Users from './screens/admin/Users';
@@ -24,10 +22,10 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={Home} />
-            <Route exact path="/admin" component={Home} />
-            <Route exact path="/restrict" component={Restrict} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/create-account" component={SignUp} />
+            <Route path="/admin" component={Home} />
+            <Route path="/restrict" component={Restrict} />
+            <Route path="/login" component={Login} />
+            <Route path="/create-account" component={SignUp} />
           </div>
         </Router>
       </Provider>
