@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { Container, Header, Card } from 'semantic-ui-react'
+import { Container, Header, Card, Button, Message } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 import Cover from '../elements/Cover';
 import ActionCreators from '../../redux/actionCreators'
@@ -12,7 +13,7 @@ class MyRecipes extends Component {
     componentDidMount() {
         this.props.load()
     }
-
+    
     render() {
         return (
             <div>
@@ -27,6 +28,25 @@ class MyRecipes extends Component {
                         <div>
                             <Header as='h1'>Minhas Receitas</Header>
                             <br />
+                            {this.props.recipes.saved &&
+                                <Message positive>
+                                <Message.Header>Receita salva com sucesso</Message.Header>
+                                <p>Sua receita foi adicionada com sucesso.</p>
+                              </Message>
+                            }
+
+                            {this.props.recipes.updated &&
+                                <Message positive>
+                                <Message.Header>Receita atualizada com sucesso</Message.Header>
+                                <p>Sua receita foi atualizada com sucesso.</p>
+                              </Message>
+                            }
+        
+                            <Button as={Link} to='/restrict/new' color='orange'>Nova Receita</Button>
+
+                             <br />
+                             <br />
+
                             <Card.Group itemsPerRow={3}>
                                 {this.props.recipes.data.map((recipe) => <MyRecipe recipe={recipe} key={recipe._id}/>)}
                             </Card.Group>

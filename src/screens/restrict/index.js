@@ -11,6 +11,7 @@ import Headbar from './elements/Headbar';
 import Home from './Home';
 import MyRecipes from './MyRecipes';
 import NewRecipe from './NewRecipe';
+import EditRecipe from './EditRecipe';
 
 const Restrict = (props) => {
     if (!props.auth.isAuth) {
@@ -24,6 +25,7 @@ const Restrict = (props) => {
                 <Route exact path={`${props.match.path}/`} component={Home} />
                 <Route path={`${props.match.path}/my`} component={MyRecipes} />
                 <Route path={`${props.match.path}/new`} component={NewRecipe} />
+                <Route path={`${props.match.path}/edit/:id`} component={EditRecipe} />
             </div>
             <Footer />
         </div>

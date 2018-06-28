@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import ActionCreator from '../../redux/actionCreators'
 
-class NewRecipe extends Component {
+class EditRecipe extends Component {
 
     state = {
         src: null,
@@ -20,6 +20,28 @@ class NewRecipe extends Component {
             step: ''
         }
 
+    }
+
+    componentDidMount() {        
+        this.props.fullReset()
+        this.props.load(this.props.match.params.id)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.recipe.recipe._id !== undefined) {
+
+            const form = {
+                ...this.state.form
+            }
+
+            form['name'] = nextProps.recipe.recipe.name
+            form['time'] = nextProps.recipe.recipe.time
+            form['serving'] = nextProps.recipe.recipe.serving
+            form['ingredients'] = [...nextProps.recipe.recipe.ingredients]
+            form['preparation'] = [...nextProps.recipe.recipe.preparation]
+            
+            this.setState({ form })
+        }
     }
 
     onSelectFile = e => {
@@ -83,7 +105,8 @@ class NewRecipe extends Component {
 
     render() {
 
-        if (this.props.recipe.saved) {
+        if (this.props.recipe.updated && !this.props.recipe.isLoading) {
+            console.log('render')
             this.props.reset()
             return <Redirect to='/restrict/my' />
         }
@@ -191,7 +214,8 @@ class NewRecipe extends Component {
                 <br />
 
                 <Button color='orange' onClick={() => {
-                    this.props.create({
+                    this.props.update({
+                        'id': this.props.match.params.id,
                         'name': this.state.form.name,
                         'time': this.state.form.time,
                         'serving': this.state.form.serving,
@@ -199,7 +223,7 @@ class NewRecipe extends Component {
                         'preparation': this.state.form.preparation,
                         'photo': this.state.src
                     })
-                }}>Criar</Button>
+                }}>Salvar</Button>
 
             </Container>
         )
@@ -214,9 +238,11 @@ const mapStateToForms = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        create: (data) => dispatch(ActionCreator.createRecipeRequest(data)),
-        reset: () => dispatch(ActionCreator.createRecipeReset())
+        load: (id) => dispatch(ActionCreator.getOneRecipeRequest(id)),
+        update: (data) => dispatch(ActionCreator.updateRecipeRequest(data)),
+        reset: () => dispatch(ActionCreator.createRecipeReset()),
+        fullReset: () => dispatch(ActionCreator.fullRecipeReset())
     }
 }
 
-export default connect(mapStateToForms, mapDispatchToProps)(NewRecipe)
+export default connect(mapStateToForms, mapDispatchToProps)(EditRecipe)

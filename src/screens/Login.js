@@ -27,6 +27,7 @@ class Login extends Component {
         const { email, password } = this.state.form
         this.props.login(email, password)
     }
+    
     render() {
 
         if (this.props.auth.isAuth) {

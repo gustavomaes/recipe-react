@@ -5,9 +5,25 @@ export const {
     Creators
 } = createActions({
     //Recipes
-    getRecipesRequest: ['filter'],
+    getRecipesRequest: null,
     getRecipesSuccess: ['recipes'],
     getRecipesFailure: ['error'],
+
+    getOneRecipeRequest: ['id'],
+    getOneRecipeSuccess: ['recipe'],
+    getOneRecipeFailure: ['error'],
+
+    createRecipeRequest: ['data'],
+    createRecipeSuccess: ['recipe'],
+    createRecipeFailure: ['errors'],
+    createRecipeReset: null,
+
+    updateRecipeRequest: ['data'],
+    updateRecipeSuccess: ['recipe'],
+    updateRecipeFailure: ['errors'],
+
+    fullRecipeReset: null,
+    
 
     //Auth
     loginRequest: ['email', 'passwd'],

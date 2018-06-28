@@ -11,7 +11,7 @@ const MyRecipe = ({ recipe }) => {
                 <Card.Header>{recipe.name}</Card.Header>
             </Card.Content>
             <Card.Content extra>
-                <Link to='/restrict/new'>
+                <Link to={`/restrict/edit/${recipe._id}`}>
                     <Icon name='edit' />
                     Editar
                 </Link>
