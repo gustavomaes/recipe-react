@@ -6,8 +6,8 @@ export const INITIAL_STATE = {
     recipe: {},
     isLoading: false,
     saved: false,
-    updated: false,
     isSaving: false,
+    updated: false,
     error: false,
     errorsMessage: []
 }
@@ -99,7 +99,6 @@ export const createRecipeReset = (state = INITIAL_STATE, action) => {
 }
 
 export const fullRecipeReset = (state = INITIAL_STATE, action) => {
-    console.log(action)
     return {
         ...state,
         data: [],
@@ -140,6 +139,33 @@ export const updateRecipeFailure = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const deleteRecipeRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state 
+    }
+}
+
+export const deleteRecipeSuccess = (state = INITIAL_STATE, action) => {
+
+    const recipes = [...state.data]
+    const id = action.id
+    const indexToDele = recipes.findIndex(recipe => recipe._id === id )
+    recipes.splice(indexToDele, 1)
+
+    return {
+        ...state,
+        data: recipes
+    }
+}
+
+export const deleteRecipeFailure = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        error: true,
+        errorsMessage: action.errors
+    }
+}
+
 
 export const HANDLERS = {
     [Types.GET_RECIPES_REQUEST]: getRecipesRequest,
@@ -158,6 +184,10 @@ export const HANDLERS = {
     [Types.UPDATE_RECIPE_REQUEST]: updateRecipeRequest,
     [Types.UPDATE_RECIPE_SUCCESS]: updateRecipeSuccess,
     [Types.UPDATE_RECIPE_FAILURE]: updateRecipeFailure,
+
+    [Types.DELETE_RECIPE_REQUEST]: deleteRecipeRequest,
+    [Types.DELETE_RECIPE_SUCCESS]: deleteRecipeSuccess,
+    [Types.DELETE_RECIPE_FAILURE]: deleteRecipeFailure,
 
     [Types.FULL_RECIPE_RESET]: fullRecipeReset    
     

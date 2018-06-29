@@ -10,11 +10,36 @@ import MyRecipe from './elements/MyRecipe';
 
 class MyRecipes extends Component {
     
+    state = {
+        message: false,
+        textHeader: '',
+        textMessage: ''
+    }
+
     componentDidMount() {
         this.props.load()
     }
     
     render() {
+
+        if (this.props.recipes.saved) {
+            this.setState({
+                message: true,
+                textHeader: 'Receita salva com sucesso',
+                textMessage: 'Sua receita foi adicionada com sucesso.'
+            })
+            this.props.fullReset()
+        }
+
+        if (this.props.recipes.updated) {
+            this.setState({
+                message: true,
+                textHeader: 'Receita atualizada com sucesso',
+                textMessage: 'Sua receita foi atualizada com sucesso.'
+            })
+            this.props.fullReset()
+        }
+
         return (
             <div>
                 <Container>
@@ -28,17 +53,10 @@ class MyRecipes extends Component {
                         <div>
                             <Header as='h1'>Minhas Receitas</Header>
                             <br />
-                            {this.props.recipes.saved &&
+                            {this.state.message &&
                                 <Message positive>
-                                <Message.Header>Receita salva com sucesso</Message.Header>
-                                <p>Sua receita foi adicionada com sucesso.</p>
-                              </Message>
-                            }
-
-                            {this.props.recipes.updated &&
-                                <Message positive>
-                                <Message.Header>Receita atualizada com sucesso</Message.Header>
-                                <p>Sua receita foi atualizada com sucesso.</p>
+                                <Message.Header>{this.state.textHeader}</Message.Header>
+                                <p>{this.state.textMessage}</p>
                               </Message>
                             }
         
@@ -68,7 +86,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: () => dispatch(ActionCreators.getRecipesRequest('my'))
+        load: () => dispatch(ActionCreators.getRecipesRequest('my')),
+        fullReset: () => dispatch(ActionCreators.fullRecipeReset())        
     }
 }
 

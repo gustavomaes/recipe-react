@@ -1,7 +1,7 @@
 import { takeLatest, all, put } from 'redux-saga/effects'
 
 import ActionCreators, { Types } from '../actionCreators'
-import { getRecipes, getRecipeById, createRecipe, updateRecipe } from './recipes'
+import { getRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipe } from './recipes'
 import { login, auth, destroyAuth } from './auth'
 
 export default function* rootSafa() {
@@ -11,6 +11,7 @@ export default function* rootSafa() {
         takeLatest(Types.GET_ONE_RECIPE_REQUEST, getRecipeById),
         takeLatest(Types.CREATE_RECIPE_REQUEST, createRecipe),
         takeLatest(Types.UPDATE_RECIPE_REQUEST, updateRecipe),
+        takeLatest(Types.DELETE_RECIPE_REQUEST, deleteRecipe),
 
         //Auth
         takeLatest(Types.AUTH_REQUEST, auth),

@@ -43,3 +43,18 @@ export function* updateRecipe(action) {
         yield put(ActionCreators.updateRecipeFailure(error.response.data.data.errors))
     }
 }
+
+export function* deleteRecipe(action) {
+    const token = localStorage.getItem('token')
+
+    try {
+        yield axios.delete(`http://localhost:3001/recipe/${action.id}`, {
+            headers: {
+                'x-access-token': token
+            }
+        })        
+        yield put(ActionCreators.deleteRecipeSuccess(action.id))
+    } catch (error) {
+        yield put(ActionCreators.deleteRecipeFailure(error.response.data.data.errors))
+    }
+}

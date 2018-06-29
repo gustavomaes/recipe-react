@@ -23,7 +23,6 @@ class EditRecipe extends Component {
     }
 
     componentDidMount() {        
-        this.props.fullReset()
         this.props.load(this.props.match.params.id)
     }
 
@@ -106,7 +105,6 @@ class EditRecipe extends Component {
     render() {
 
         if (this.props.recipe.updated && !this.props.recipe.isLoading) {
-            console.log('render')
             this.props.reset()
             return <Redirect to='/restrict/my' />
         }
@@ -241,7 +239,6 @@ const mapDispatchToProps = (dispatch) => {
         load: (id) => dispatch(ActionCreator.getOneRecipeRequest(id)),
         update: (data) => dispatch(ActionCreator.updateRecipeRequest(data)),
         reset: () => dispatch(ActionCreator.createRecipeReset()),
-        fullReset: () => dispatch(ActionCreator.fullRecipeReset())
     }
 }
 

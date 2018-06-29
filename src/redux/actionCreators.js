@@ -22,6 +22,10 @@ export const {
     updateRecipeSuccess: ['recipe'],
     updateRecipeFailure: ['errors'],
 
+    deleteRecipeRequest: ['id'],
+    deleteRecipeSuccess: ['id'],
+    deleteRecipeFailure: ['errors'],
+
     fullRecipeReset: null,
     
 
