@@ -47,7 +47,22 @@ export const {
 
     createUserRequest: ['data'],
     createUserSuccess: ['user'],
-    createUserFailure: ['errors']
+    createUserFailure: ['errors'],
+
+    updateUser: ['user'],
+
+    //User
+    updateUserRequest: ['data'],
+    updateUserSuccess: ['user'],
+    updateUserFailure: ['error'],
+
+    updatePasswdRequest: ['data'],
+    updatePasswdSuccess: null,
+    updatePasswdFailure: ['error'],
+
+    userReset: null
+    
+
 })
 
 export default Creators

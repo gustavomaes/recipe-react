@@ -54,7 +54,7 @@ class SignUp extends Component {
                         </Header>
                         {this.props.auth.error &&
                             <Message negative>
-                                <Message.Header>Erro ao tentar entrar</Message.Header>
+                                <Message.Header>Erro</Message.Header>
                                 <p>{this.props.auth.errorMessage}</p>
                             </Message>
                         }

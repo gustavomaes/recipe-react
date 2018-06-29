@@ -72,6 +72,14 @@ export const destroyAuthSuccess = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const updateUser = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        user: action.user
+    }
+}
+
+
 export const createUserRequest = (state = INITIAL_STATE, action) => {
     return {
         ...state,
@@ -82,7 +90,6 @@ export const createUserRequest = (state = INITIAL_STATE, action) => {
 }
 
 export const createUserSuccess = (state = INITIAL_STATE, action) => {
-    console.log(action)
     return {
         ...state,
         isLoggingIn: false,
@@ -92,7 +99,6 @@ export const createUserSuccess = (state = INITIAL_STATE, action) => {
 }
 
 export const createUserFailure = (state = INITIAL_STATE, action) => {
-    console.log(action)
     return {
         ...state,
         isLoggingIn: false,
@@ -111,6 +117,8 @@ export const HANDLERS = {
     [Types.AUTH_FAILURE]: authFailure,
 
     [Types.DESTROY_AUTH_SUCCESS]: destroyAuthSuccess,
+
+    [Types.UPDATE_USER]: updateUser,
 
     [Types.CREATE_USER_REQUEST]: createUserRequest,
     [Types.CREATE_USER_SUCCESS]: createUserSuccess,

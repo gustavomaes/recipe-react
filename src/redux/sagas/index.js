@@ -3,6 +3,7 @@ import { takeLatest, all, put } from 'redux-saga/effects'
 import ActionCreators, { Types } from '../actionCreators'
 import { getRecipes, getMyRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipe } from './recipes'
 import { login, auth, createUser, destroyAuth } from './auth'
+import { updateUser, updatePasswd } from './user'
 
 export default function* rootSafa() {
     yield all([
@@ -20,6 +21,10 @@ export default function* rootSafa() {
         takeLatest(Types.CREATE_USER_REQUEST, createUser),
         takeLatest(Types.DESTROY_AUTH_REQUEST, destroyAuth),
 
+        //User
+        takeLatest(Types.UPDATE_USER_REQUEST, updateUser),
+        takeLatest(Types.UPDATE_PASSWD_REQUEST, updatePasswd),
+        
         //Initial Request
         put(ActionCreators.authRequest())
         

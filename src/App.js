@@ -10,7 +10,6 @@ import Home from './screens/Home';
 import Restrict from './screens/restrict/index';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
-import MyAccount from './screens/MyAccount';
 import EditRecipe from './screens/EditRecipe';
 import EditUser from './screens/admin/EditUser';
 import Users from './screens/admin/Users';
