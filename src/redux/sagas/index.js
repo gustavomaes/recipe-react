@@ -5,7 +5,15 @@ import { getRecipes, getMyRecipes, getRecipeById, createRecipe, updateRecipe, de
 import { login, auth, createUser, destroyAuth } from './auth'
 import { updateUser, updateUserById, updatePasswd, getUsers, getUserById, deleteUser } from './user'
 
-export default function* rootSafa() {
+import Api from '../../services/Api'
+
+export default function* rootSaga() {
+
+    const devURL = 'http://localhost:3001'
+    const prodURL = 'http://localhost:3001'
+    const baseURL = process.env.NODE_ENV === 'development' ? devURL : prodURL
+    const api = new Api(baseURL)
+
     yield all([
         //Recipes
         takeLatest(Types.GET_RECIPES_REQUEST, getRecipes),
@@ -22,12 +30,12 @@ export default function* rootSafa() {
         takeLatest(Types.DESTROY_AUTH_REQUEST, destroyAuth),
 
         //User
-        takeLatest(Types.UPDATE_USER_REQUEST, updateUser),
-        takeLatest(Types.UPDATE_USER_ID_REQUEST, updateUserById),
-        takeLatest(Types.UPDATE_PASSWD_REQUEST, updatePasswd),
-        takeLatest(Types.GET_USERS_REQUEST, getUsers),
-        takeLatest(Types.GET_USER_ID_REQUEST, getUserById),
-        takeLatest(Types.DELETE_USER_REQUEST, deleteUser),
+        takeLatest(Types.UPDATE_USER_REQUEST, updateUser({ api })),
+        takeLatest(Types.UPDATE_USER_ID_REQUEST, updateUserById({ api })),
+        takeLatest(Types.UPDATE_PASSWD_REQUEST, updatePasswd({ api })),
+        takeLatest(Types.GET_USERS_REQUEST, getUsers({ api })),
+        takeLatest(Types.GET_USER_ID_REQUEST, getUserById({ api })),
+        takeLatest(Types.DELETE_USER_REQUEST, deleteUser({ api })),
         
         //Initial Request
         put(ActionCreators.authRequest())
