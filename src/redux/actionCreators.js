@@ -56,9 +56,25 @@ export const {
     updateUserSuccess: ['user'],
     updateUserFailure: ['error'],
 
+    updateUserIdRequest: ['id', 'data'],
+    updateUserIdSuccess: ['user'],
+    updateUserIdFailure: ['error'],
+
     updatePasswdRequest: ['data'],
     updatePasswdSuccess: null,
     updatePasswdFailure: ['error'],
+
+    getUsersRequest: null,
+    getUsersSuccess: ['users'],
+    getUsersFailure: ['error'],
+
+    deleteUserRequest: ['id'],
+    deleteUserSuccess: ['id'],
+    deleteUserFailure: ['error'],
+
+    getUserIdRequest: ['id'],
+    getUserIdSuccess: ['user'],
+    getUserIdFailure: ['error'],
 
     userReset: null
     

@@ -19,7 +19,6 @@ class EditRecipe extends Component {
             preparation: [],
             step: ''
         }
-
     }
 
     componentDidMount() {        
