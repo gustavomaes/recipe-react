@@ -1,112 +1,249 @@
 import React, { Component } from 'react'
 
-import { Container, Header, Form, Segment, Button, Divider, Input, List, Icon } from 'semantic-ui-react'
+import { Container, Header, Form, Segment, Button, Divider, Input, List, Icon, Message } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-import Headbar from './elements/Headbar';
-import Footer from './elements/Footer';
+import ActionCreator from '../redux/actionCreators'
 
 class EditRecipe extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            file: null
+    state = {
+        src: null,
+        form: {
+            name: '',
+            time: '',
+            serving: '',
+            ingredients: [],
+            ingredient: '',
+            preparation: [],
+            step: ''
         }
-        this.handleChange = this.handleChange.bind(this)
+
     }
 
-    handleChange(event) {
-        this.setState({
-            file: URL.createObjectURL(event.target.files[0])
-        })
+    componentDidMount() {        
+        this.props.load(this.props.match.params.id)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.recipe.recipe._id !== undefined) {
+
+            const form = {
+                ...this.state.form
+            }
+
+            form['name'] = nextProps.recipe.recipe.name
+            form['time'] = nextProps.recipe.recipe.time
+            form['serving'] = nextProps.recipe.recipe.serving
+            form['ingredients'] = [...nextProps.recipe.recipe.ingredients]
+            form['preparation'] = [...nextProps.recipe.recipe.preparation]
+            
+            this.setState({ form })
+        }
+    }
+
+    onSelectFile = e => {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader()
+            reader.addEventListener(
+                'load',
+                () =>
+                    this.setState({
+                        src: reader.result,
+                    }),
+                false
+            )
+            reader.readAsDataURL(e.target.files[0])
+        }
+    }
+
+    handleChange = (fieldname) => event => {
+        const form = {
+            ...this.state.form
+        }
+        form[fieldname] = event.target.value
+        this.setState({ form })
+    }
+
+    handleListChange = (fieldname) => event => {
+        const form = {
+            ...this.state.form
+        }
+        form[fieldname] = event.target.value
+        this.setState({ form })
+    }
+
+    handleClick = (fieldname, fieldnameform) => event => {
+        const form = {
+            ...this.state.form
+        }
+
+        if (form[fieldnameform] === '') {
+            return
+        }
+
+        let list = [...form[fieldname], form[fieldnameform]]
+
+        form[fieldname] = list
+        form[fieldnameform] = ''
+        this.setState({ form })
+
+    }
+
+    handleRemove = (fieldname, position) => event => {
+        const form = {
+            ...this.state.form
+        }
+        let list = form[fieldname]
+        list.splice(position, 1);
+
+        form[fieldname] = list
+        this.setState({ form })
     }
 
     render() {
+
+        if (this.props.recipe.updated && !this.props.recipe.isLoading) {
+            this.props.reset()
+            if (this.props.match.path === '/restrict/edit/:id'){
+                return <Redirect to='/restrict/my' />
+            } else {
+                return <Redirect to='/admin' />                
+            }
+        }
+        
         return (
-            <div>
-                <Headbar />
-                <Container>
-                    <br />
-                    <br />
-                    <Header as='h1'>Nova Receita</Header>
-                    <br />
+            <Container>
+                <br />
+                <br />
+                <Header as='h1'>Nova Receita</Header>
+                <br />
 
-                    <Form>
-                        <Form.Field>
-                            <label>Foto</label>
-                            <input type='file' accept="image/x-png,image/gif,image/jpeg" onChange={this.handleChange}/>
-                            <br />
-                            <img className='img-container' src={this.state.file}/>
+                {this.props.recipe.error &&
+                    <Message negative>
+                        <Message.Header>Erro ao tentar entrar</Message.Header>
+                        {Object.keys(this.props.recipe.errorsMessage).map(key => {
+                            return <p>{this.props.recipe.errorsMessage[key].message}</p>
+                        })}
+                    </Message>
+                    
+            }
+                <Form>
+                    <Form.Field>
+                        <label>Foto</label>
 
-                        </Form.Field>
+                        <input type="file" onChange={this.onSelectFile} />
+                        <br />
+                        {this.state.src &&
+                            <img src={this.state.src} />
+                        }
+                    </Form.Field>
 
-                        <Form.Field>
-                            <label>Título</label>
-                            <input type='text' />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Tempo de preparo</label>
-                            <input type='text' />
-                        </Form.Field>
+                    <Form.Field>
+                        <label>Título</label>
+                        <input type='text' value={this.state.form.name} onChange={this.handleChange('name')} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Tempo de preparo</label>
+                        <input type='text' value={this.state.form.time} onChange={this.handleChange('time')} />
+                    </Form.Field>
 
-                        <Form.Field>
-                            <label>Serve quantas pessoas ?</label>
-                            <input type='number' />
-                        </Form.Field>
+                    <Form.Field>
+                        <label>Serve quantas pessoas ?</label>
+                        <input type='number' value={this.state.form.serving} onChange={this.handleChange('serving')} />
+                    </Form.Field>
+                </Form>
 
-                        <Button color='orange'>Criar</Button>
-                    </Form>
+                <br />
+                <Divider />
 
-                    <br />
-                    <Divider />
+                <Header as='h1'>Ingredientes</Header>
 
-                    <Header as='h1'>Ingredientes</Header>
+                <Input className='input-fill'
+                    value={this.state.form.ingredient}
+                    onChange={this.handleListChange('ingredient')}
+                    action={<Button color='orange'
+                        icon='plus'
+                        onClick={this.handleClick('ingredients', 'ingredient')} />}
+                    size='medium'
+                    placeholder='Informe o ingrediente' />
 
-                    <Input className='input-fill' action={{ color: 'orange', icon: 'plus' }} size='medium' placeholder='Informe o ingrediente' />
+                <List>
 
-                    <List>
-                        <List.Item>
-                            <List.Content>
-                                <Icon link color='red' name='delete' />
-                                2 xícaras de fubá mimoso
-                            </List.Content>
-                        </List.Item>
-                        <List.Item>
-                            <List.Content>
-                                <Icon link color='red' name='delete' />
-                                4 colheres de sopa de óleo
-                            </List.Content>
-                        </List.Item>
+                    {this.state.form.ingredients.map((i, position) => {
+                        return (
+                            <List.Item key={position}>
+                                <List.Content>
+                                    <Icon link color='red' name='delete' onClick={this.handleRemove('ingredients', position)} />
+                                    {i}
+                                </List.Content>
+                            </List.Item>)
+                    })}
 
-                    </List>
+                </List>
 
-                    <br />
-                    <Divider />
+                <br />
+                <Divider />
 
-                    <Header as='h1'>Modo de Preparo</Header>
+                <Header as='h1'>Modo de Preparo</Header>
 
-                    <Input className='input-fill' action={{ color: 'orange', icon: 'plus' }} size='medium' placeholder='Descreva os passos para prepar a receita' />
+                <Input className='input-fill'
+                    value={this.state.form.step}
+                    onChange={this.handleListChange('step')}
+                    action={<Button color='orange'
+                        icon='plus'
+                        onClick={this.handleClick('preparation', 'step')} />}
+                    size='medium'
+                    placeholder='Descreva os passos para prepar a receita' />
 
-                    <List ordered>
-                        <List.Item>
-                            <List.Content>
-                                <Icon link color='red' name='delete' />
-                                Dissolva o fubá em 2 copos de água fria, leve a panela em fogo médio e adicione o óleo, cebola, alho e o sal
-                            </List.Content>
-                        </List.Item>
-                        <List.Item>
-                            <List.Content>
-                                <Icon link color='red' name='delete' />
-                                Em seguida acrescente o fubá já diluído (na água toda), mexendo de preferência com uma colher de pau por mais ou menos 15 minutos, até obter uma consistência bem firme na polenta
-                            </List.Content>
-                        </List.Item>
-                    </List>
+                <List ordered>
+                    {this.state.form.preparation.map((p, position) => {
+                        return (
+                            <List.Item key={position}>
+                                <List.Content>
+                                    <Icon link color='red' name='delete' onClick={this.handleRemove('preparation', position)} />
+                                    {p}
+                                </List.Content>
+                            </List.Item>)
+                    })}
 
-                </Container>
-                <Footer />
-            </div>
+
+                </List>
+
+                <br />
+                <Divider />
+                <br />
+
+                <Button color='orange' onClick={() => {
+                    this.props.update({
+                        'id': this.props.match.params.id,
+                        'name': this.state.form.name,
+                        'time': this.state.form.time,
+                        'serving': this.state.form.serving,
+                        'ingredients': this.state.form.ingredients,
+                        'preparation': this.state.form.preparation,
+                        'photo': this.state.src
+                    })
+                }}>Salvar</Button>
+
+            </Container>
         )
     }
 }
 
-export default EditRecipe
+const mapStateToForms = (state) => {
+    return {
+        recipe: state.recipes
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        load: (id) => dispatch(ActionCreator.getOneRecipeRequest(id)),
+        update: (data) => dispatch(ActionCreator.updateRecipeRequest(data)),
+        reset: () => dispatch(ActionCreator.createRecipeReset()),
+    }
+}
+
+export default connect(mapStateToForms, mapDispatchToProps)(EditRecipe)

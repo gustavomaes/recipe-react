@@ -9,12 +9,11 @@ import ActionCreators from '../../redux/actionCreators'
 import Footer from '../elements/Footer';
 import Headbar from './elements/Headbar';
 import Home from './Home';
-import MyRecipes from './MyRecipes';
-import NewRecipe from './NewRecipe';
 import MyAccount from '../MyAccount';
+import Users from './Users';
 import EditRecipe from '../EditRecipe';
 
-const Restrict = (props) => {
+const Admin = (props) => {
     if (!props.auth.isAuth) {
         return <Redirect to='/' />
     }
@@ -24,10 +23,9 @@ const Restrict = (props) => {
             <Headbar />
             <div>
                 <Route exact path={`${props.match.path}/`} component={Home} />
+                <Route path={`${props.match.path}/users`} component={Users} />
                 <Route path={`${props.match.path}/my-account`} component={MyAccount} />
-                <Route path={`${props.match.path}/my`} component={MyRecipes} />
-                <Route path={`${props.match.path}/new`} component={NewRecipe} />
-                <Route path={`${props.match.path}/edit/:id`} component={EditRecipe} />
+                <Route path={`${props.match.path}/edit/:id`} component={EditRecipe} />                
             </div>
             <Footer />
         </div>
@@ -40,4 +38,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Restrict)
+export default connect(mapStateToProps)(Admin)
