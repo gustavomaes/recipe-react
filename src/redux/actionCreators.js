@@ -9,6 +9,10 @@ export const {
     getRecipesSuccess: ['recipes'],
     getRecipesFailure: ['error'],
 
+    getMyRecipesRequest: null,
+    getMyRecipesSuccess: ['recipes'],
+    getMyRecipesFailure: ['error'],
+
     getOneRecipeRequest: ['id'],
     getOneRecipeSuccess: ['recipe'],
     getOneRecipeFailure: ['error'],
@@ -39,7 +43,11 @@ export const {
     authFailure: null,
 
     destroyAuthRequest: null,
-    destroyAuthSuccess: null
+    destroyAuthSuccess: null,
+
+    createUserRequest: ['data'],
+    createUserSuccess: ['user'],
+    createUserFailure: ['errors']
 })
 
 export default Creators

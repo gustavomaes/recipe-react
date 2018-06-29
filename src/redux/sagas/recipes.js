@@ -4,9 +4,20 @@ import { put } from 'redux-saga/effects'
 import ActionCreators from '../actionCreators'
 
 
-export function* getRecipes() {
+export function* getRecipes(action) {
     const recipes = yield axios.get(`http://localhost:3001/recipe`)
     yield put(ActionCreators.getRecipesSuccess(recipes.data))
+}
+
+export function* getMyRecipes() {
+    const token = localStorage.getItem('token')
+    
+    const recipes = yield axios.get(`http://localhost:3001/recipe/my`, {
+        headers: {
+            'x-access-token': token
+        }
+    })  
+    yield put(ActionCreators.getMyRecipesSuccess(recipes.data))
 }
 
 export function* getRecipeById(action) {

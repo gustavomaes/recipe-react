@@ -86,7 +86,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: () => dispatch(ActionCreators.getRecipesRequest('my')),
+        load: () => dispatch(ActionCreators.getMyRecipesRequest()),
         fullReset: () => dispatch(ActionCreators.fullRecipeReset())        
     }
 }

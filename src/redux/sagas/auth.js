@@ -43,6 +43,23 @@ export function* login(action) {
     }
 }
 
+export function* createUser(action) {
+    let user = {}
+
+    try {
+        user = yield axios.post('http://localhost:3001/user', action.data)
+
+        if (user.data.token) {            
+            let token = user.data.token
+            localStorage.setItem('token', token)
+            const userDecoded = jwtDecode(token)
+            yield put(ActionCreators.createUserSuccess(userDecoded))
+        }
+    } catch (e){
+        yield put(ActionCreators.createUserFailure(e.response.data.message))        
+    }
+}
+
 export function* destroyAuth() {
     localStorage.removeItem('token')
 

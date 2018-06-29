@@ -101,9 +101,8 @@ class NewRecipe extends Component {
                         {Object.keys(this.props.recipe.errorsMessage).map(key => {
                             return <p>{this.props.recipe.errorsMessage[key].message}</p>
                         })}
-                    </Message>
-                    
-            }
+                    </Message>                    
+                }
                 <Form>
                     <Form.Field>
                         <label>Foto</label>

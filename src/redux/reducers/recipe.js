@@ -36,6 +36,30 @@ export const getRecipesFailure = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const getMyRecipesRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isLoading: true
+    }
+}
+
+export const getMyRecipesSuccess = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isLoading: false,
+        data: action.recipes
+    }
+}
+
+export const getMyRecipesFailure = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.error
+    }
+}
+
 export const getOneRecipeRequest = (state = INITIAL_STATE, action) => {
     return {
         ...state,
@@ -171,6 +195,10 @@ export const HANDLERS = {
     [Types.GET_RECIPES_REQUEST]: getRecipesRequest,
     [Types.GET_RECIPES_SUCCESS]: getRecipesSuccess,
     [Types.GET_RECIPES_FAILURE]: getRecipesFailure,
+
+    [Types.GET_MY_RECIPES_REQUEST]: getMyRecipesRequest,
+    [Types.GET_MY_RECIPES_SUCCESS]: getMyRecipesSuccess,
+    [Types.GET_MY_RECIPES_FAILURE]: getMyRecipesFailure,
 
     [Types.GET_ONE_RECIPE_REQUEST]: getOneRecipeRequest,
     [Types.GET_ONE_RECIPE_SUCCESS]: getOneRecipeSuccess,

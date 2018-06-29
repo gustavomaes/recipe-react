@@ -72,14 +72,49 @@ export const destroyAuthSuccess = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const createUserRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isLoggingIn: true,
+        error: false,
+        errorMessage: ''
+    }
+}
+
+export const createUserSuccess = (state = INITIAL_STATE, action) => {
+    console.log(action)
+    return {
+        ...state,
+        isLoggingIn: false,
+        isAuth: true,
+        user: action.user        
+    }
+}
+
+export const createUserFailure = (state = INITIAL_STATE, action) => {
+    console.log(action)
+    return {
+        ...state,
+        isLoggingIn: false,
+        error: true,
+        errorMessage: action.errors
+    }
+}
+
 export const HANDLERS = {
     [Types.LOGIN_REQUEST]: loginRequest,
     [Types.LOGIN_SUCCESS]: loginSuccess,
     [Types.LOGIN_FAILURE]: loginFailure,
+
     [Types.AUTH_REQUEST]: authRequest,
     [Types.AUTH_SUCCESS]: authSuccess,
     [Types.AUTH_FAILURE]: authFailure,
-    [Types.DESTROY_AUTH_SUCCESS]: destroyAuthSuccess
+
+    [Types.DESTROY_AUTH_SUCCESS]: destroyAuthSuccess,
+
+    [Types.CREATE_USER_REQUEST]: createUserRequest,
+    [Types.CREATE_USER_SUCCESS]: createUserSuccess,
+    [Types.CREATE_USER_FAILURE]: createUserFailure
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)
