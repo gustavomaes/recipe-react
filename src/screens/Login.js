@@ -31,11 +31,11 @@ class Login extends Component {
     render() {
 
         if (this.props.auth.isAuth) {
-            // if (this.props.auth.user.role === 'admin') {
-            //     return <Redirect to='/admin' />
-            // }
-            return <Redirect to='/restrict' />
-            
+            if (this.props.auth.user.role === 'admin'){
+                return <Redirect to='/admin' />
+            } else {
+                return <Redirect to='/restrict' />                
+            }            
         }
         return (
             <div className='login-form'>

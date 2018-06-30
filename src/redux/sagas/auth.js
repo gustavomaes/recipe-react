@@ -1,19 +1,14 @@
-import axios from 'axios'
 import jwtDecode from "jwt-decode";
-import { put } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 
 import ActionCreators from '../actionCreators'
 
-export function* auth() {
+export const auth = ({ api }) => function* () {
     const token = localStorage.getItem('token')
 
     if (token) {
         try {
-            const user = yield axios.get('http://localhost:3001/user/me', {
-                headers: {
-                    'x-access-token': token
-                }
-            })
+            const user = yield call(api.getUserById, 'me')
             yield put(ActionCreators.authSuccess(user.data))
         } catch (e) {
             yield put(ActionCreators.authFailure('invalid token'))
@@ -23,45 +18,42 @@ export function* auth() {
     }
 }
 
-export function* login(action) {
-    let login = {}
-
+export const login = ({ api }) => function* (action) {
     try {
-        login = yield axios.post('http://localhost:3001/user/auth', {
+        let login = yield call(api.login, {
             email: action.email,
             password: action.passwd
         })
+
         if (login.data.token) {
-            let token = login.data.token
-            localStorage.setItem('token', token)
-            const user = jwtDecode(token)
-    
+            const user = setUserToken(login)
             yield put(ActionCreators.loginSuccess(user))
         }
-    } catch (e){
-        yield put(ActionCreators.loginFailure(e.response.data.message))        
+    } catch (e) {
+        yield put(ActionCreators.loginFailure(e.response.data.message))
     }
 }
 
-export function* createUser(action) {
-    let user = {}
-
+export const createUser = ({ api }) => function* (action) {
     try {
-        user = yield axios.post('http://localhost:3001/user', action.data)
+        let user = yield call(api.createUser, action.data)
 
-        if (user.data.token) {            
-            let token = user.data.token
-            localStorage.setItem('token', token)
-            const userDecoded = jwtDecode(token)
+        if (user.data.token) {
+            const userDecoded = setUserToken(user)            
             yield put(ActionCreators.createUserSuccess(userDecoded))
         }
-    } catch (e){
-        yield put(ActionCreators.createUserFailure(e.response.data.message))        
+    } catch (e) {
+        yield put(ActionCreators.createUserFailure(e.response.data.message))
     }
 }
 
 export function* destroyAuth() {
     localStorage.removeItem('token')
-
     yield put(ActionCreators.destroyAuthSuccess())
+}
+
+const setUserToken = (data) => {
+    let token = data.data.token
+    localStorage.setItem('token', token)
+    return jwtDecode(token)
 }

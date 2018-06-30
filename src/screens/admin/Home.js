@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { Container, Header, Card, Table, Button, Icon } from 'semantic-ui-react'
+import { Container, Header, Table, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-import Cover from '../elements/Cover';
-import Recipe from '../elements/Recipe';
 import ActionCreators from '../../redux/actionCreators'
 
 class Home extends Component {

@@ -1,69 +1,50 @@
-import axios from 'axios'
-import { put } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 
 import ActionCreators from '../actionCreators'
 
 
-export function* getRecipes(action) {
-    const recipes = yield axios.get(`http://localhost:3001/recipe`)
-    yield put(ActionCreators.getRecipesSuccess(recipes.data))
+export const getRecipes = ({ api }) => function* () {
+
+    try {
+        const recipes = yield call(api.getRecipes, ``)
+        yield put(ActionCreators.getRecipesSuccess(recipes.data))
+    } catch (error) { }
+
 }
 
-export function* getMyRecipes() {
-    const token = localStorage.getItem('token')
-    
-    const recipes = yield axios.get(`http://localhost:3001/recipe/my`, {
-        headers: {
-            'x-access-token': token
-        }
-    })  
-    yield put(ActionCreators.getMyRecipesSuccess(recipes.data))
+export const getMyRecipes = ({ api }) => function* () {
+    try {
+        const recipes = yield call(api.getRecipes, `/my`)
+        yield put(ActionCreators.getMyRecipesSuccess(recipes.data))
+    } catch (error) { }
 }
 
-export function* getRecipeById(action) {
-    const recipes = yield axios.get(`http://localhost:3001/recipe/id/${action.id}`)
+export const getRecipeById = ({ api }) => function* (action) {
+    const recipes = yield call(api.getRecipes, `/id/${action.id}`)    
     yield put(ActionCreators.getOneRecipeSuccess(recipes.data))
 }
 
-export function* createRecipe(action) {
-    const token = localStorage.getItem('token')
-
+export const createRecipe = ({ api }) => function* (action) {
     try {
-        const recipe = yield axios.post(`http://localhost:3001/recipe`, action.data, {
-            headers: {
-                'x-access-token': token
-            }
-        })        
+        const recipe = yield call(api.createRecipe, action.data)        
         yield put(ActionCreators.createRecipeSuccess(recipe.data))
     } catch (error) {
         yield put(ActionCreators.createRecipeFailure(error.response.data.data.errors))
     }
 }
 
-export function* updateRecipe(action) {
-    const token = localStorage.getItem('token')
-
+export const updateRecipe = ({ api }) => function* (action) {
     try {
-        const recipe = yield axios.put(`http://localhost:3001/recipe/${action.data.id}`, action.data, {
-            headers: {
-                'x-access-token': token
-            }
-        })        
+        const recipe = yield call(api.updateRecipe, action.data.id, action.data)                
         yield put(ActionCreators.updateRecipeSuccess(recipe.data))
     } catch (error) {
         yield put(ActionCreators.updateRecipeFailure(error.response.data.data.errors))
     }
 }
 
-export function* deleteRecipe(action) {
-    const token = localStorage.getItem('token')
-
+export const deleteRecipe = ({ api }) => function* (action) {
     try {
-        yield axios.delete(`http://localhost:3001/recipe/${action.id}`, {
-            headers: {
-                'x-access-token': token
-            }
-        })        
+        yield call(api.deleteRecipe, action.id)                        
         yield put(ActionCreators.deleteRecipeSuccess(action.id))
     } catch (error) {
         yield put(ActionCreators.deleteRecipeFailure(error.response.data.data.errors))

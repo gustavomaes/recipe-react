@@ -3,9 +3,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
 
-import ActionCreators from '../../redux/actionCreators'
-
-
 import Footer from '../elements/Footer';
 import Headbar from './elements/Headbar';
 import Home from './Home';

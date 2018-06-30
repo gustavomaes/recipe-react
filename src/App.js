@@ -11,9 +11,6 @@ import Restrict from './screens/restrict/index';
 import Admin from './screens/admin/index';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
-import EditRecipe from './screens/EditRecipe';
-import EditUser from './screens/admin/EditUser';
-import Users from './screens/admin/Users';
 
 class App extends Component {
   render() {

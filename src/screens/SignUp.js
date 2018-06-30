@@ -63,7 +63,7 @@ class SignUp extends Component {
                                 <Form.Input fluid icon='address card' iconPosition='left' placeholder='Nome' type='text' value={this.state.form.name} onChange={this.handleChange('name')}/>
                                 <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail' type='email' value={this.state.form.email} onChange={this.handleChange('email')}/>
                                 <Form.Input fluid icon='lock' iconPosition='left' placeholder='Senha' type='password' value={this.state.form.password} onChange={this.handleChange('password')}/>
-                                <Button color='orange' fluid size='large' onClick={this.create}>Entrar</Button>
+                                <Button color='orange' fluid size='large' onClick={this.create}>Cadastrar</Button>
                             </Segment>
                         </Form>
                         <Message> Já possui uma conta? <Link to='/login'>Entrar</Link> </Message>

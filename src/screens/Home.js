@@ -20,7 +20,11 @@ class Home extends Component {
     render() {
 
         if(this.props.auth.isAuth) {
-            return <Redirect to='/restrict' />
+            if (this.props.auth.user.role === 'admin'){
+                return <Redirect to='/admin' />
+            } else {
+                return <Redirect to='/restrict' />                
+            }
         }
 
         return (
@@ -38,7 +42,7 @@ class Home extends Component {
                             <Header as='h1'>Todas Receitas</Header>
                             <br />
                             <Card.Group itemsPerRow={3}>
-                                {this.props.recipes.data.map((recipe) => <Recipe recipe={recipe}/>)}
+                                {this.props.recipes.data.map((recipe) => <Recipe key={recipe._id} recipe={recipe}/>)}
                             </Card.Group>
                         </div>
                     }

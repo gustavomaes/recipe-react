@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Header, Form, Segment, Button, Divider } from 'semantic-ui-react'
+import { Container, Header, Form, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 

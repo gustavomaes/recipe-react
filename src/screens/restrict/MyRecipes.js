@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { Container, Header, Card, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-import Cover from '../elements/Cover';
 import ActionCreators from '../../redux/actionCreators'
 import MyRecipe from './elements/MyRecipe';
 

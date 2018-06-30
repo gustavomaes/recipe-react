@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Header, Image, Card, Button, Icon, Modal } from 'semantic-ui-react'
+import { Image, Card,Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -15,8 +15,6 @@ class MyRecipe extends Component {
     open = () => this.setState({ open: true })
 
     render() {
-        const { open } = this.state
-
         return (
             <Card>
                 <Image src={this.props.recipe.photoUrl} />

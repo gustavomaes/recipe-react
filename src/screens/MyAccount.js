@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Header, Form, Segment, Button, Divider, Message } from 'semantic-ui-react'
+import { Container, Header, Form, Button, Divider, Message } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 import ActionCreators from '../redux/actionCreators'

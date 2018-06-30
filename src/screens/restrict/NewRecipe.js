@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, Header, Form, Segment, Button, Divider, Input, List, Icon, Message } from 'semantic-ui-react'
+import { Container, Header, Form, Button, Divider, Input, List, Icon, Message } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -110,7 +110,7 @@ class NewRecipe extends Component {
                         <input type="file" onChange={this.onSelectFile} />
                         <br />
                         {this.state.src &&
-                            <img src={this.state.src} />
+                            <img src={this.state.src} alt='recipe'/>
                         }
                     </Form.Field>
 

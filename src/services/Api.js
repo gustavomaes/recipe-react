@@ -23,11 +23,21 @@ const Api = base => {
 
     return {
         //User
-        getUserById: id => get(`/user/${id}`),
+        getUserById: id => get(`user/${id}`),
         getUsers: () => get(`user`),
         updateUser: (id, data) => update(`user/${id}`, data),
         updatePasswd: (data) => update(`user/password`, data),
-        removeUser: id => remove(`user/${id}`)
+        removeUser: id => remove(`user/${id}`),
+
+        //Recipes
+        getRecipes: filter => get(`recipe${filter}`),
+        createRecipe: data => create(`recipe`, data),
+        updateRecipe: (id, data) => update(`recipe/${id}`, data),
+        deleteRecipe: id => remove(`recipe/${id}`),
+
+        //Auth
+        login: data => create(`user/auth`, data),
+        createUser: data => create(`user`, data)
     }
 }
 

@@ -21,7 +21,7 @@ const Headbar = (props) => {
                     <Dropdown item text={props.auth.user.name}>
                         <Dropdown.Menu>
                             {props.auth.user.role === 'admin' && <Dropdown.Item as={Link} to='/restrict'>Modo: Usuário</Dropdown.Item>}
-                            <Dropdown.Item as={Link} to='/restrict/my-account'>Minha Conta</Dropdown.Item>
+                            <Dropdown.Item as={Link} to='/admin/my-account'>Minha Conta</Dropdown.Item>
                             <Dropdown.Item onClick={props.logout}>Sair</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>

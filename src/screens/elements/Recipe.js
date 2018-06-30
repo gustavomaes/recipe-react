@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Divider, Header, Image, List, Card, Icon, Modal, Button } from 'semantic-ui-react'
+import { Divider, Header, Image, List, Card, Icon, Modal } from 'semantic-ui-react'
 import Ingredient from './Ingredient';
 import Preparation from './Preparation';
 
