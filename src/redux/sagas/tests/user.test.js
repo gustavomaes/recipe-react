@@ -1,15 +1,17 @@
 import sagaHelper from 'redux-saga-testing'
-import { getRecipes } from '../recipes'
+import { getUsers } from '../user'
+import { put, call } from 'redux-saga/effects'
 
 describe('should test getUsers', () => {
-
-
     const apiMock = {
-        getRecipes: jest.fn()
+        getUsers: jest.fn()
     }
 
-    const it = sagaHelper(getRecipes({apiMock}))
+    const it = sagaHelper(getUsers(apiMock))
+
     it('should call getUsers', result => {
         console.log(result)
     })
+
+
 })

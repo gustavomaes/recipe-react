@@ -33,7 +33,8 @@ export default function* rootSaga() {
         takeLatest(Types.UPDATE_USER_REQUEST, updateUser({ api })),
         takeLatest(Types.UPDATE_USER_ID_REQUEST, updateUserById({ api })),
         takeLatest(Types.UPDATE_PASSWD_REQUEST, updatePasswd({ api })),
-        takeLatest(Types.GET_USERS_REQUEST, getUsers({ api })),
+        // takeLatest(Types.GET_USERS_REQUEST, getUsers({ api })),
+        takeLatest(Types.GET_USERS_REQUEST, getUsers, api),        
         takeLatest(Types.GET_USER_ID_REQUEST, getUserById({ api })),
         takeLatest(Types.DELETE_USER_REQUEST, deleteUser({ api })),
         

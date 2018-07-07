@@ -30,7 +30,7 @@ export const updatePasswd = ({ api }) => function* (action) {
     }
 }
 
-export const getUsers = ({ api }) => function*() {
+export function* getUsers(api) {
     try {
         const users = yield call(api.getUsers)        
         yield put(ActionCreators.getUsersSuccess(users.data))
