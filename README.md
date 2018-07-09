@@ -7,7 +7,7 @@ Subtitle
 ## Table of Contents
 
 - [1 First](#first)
-- [2 Second](#Second)
+- [2 Second](#second)
 	- [2.1 Second - One](#second-one)
 	- [2.2 Second - Two](#second-two)
 	- [2.3 Second - Three](#second-three)
@@ -24,7 +24,7 @@ Description technology list
 
 Description second
 
-### Second - One
+### Second One
 
 Description second one
 
@@ -33,7 +33,7 @@ Description second one
   $ git clone 
   ```
 
-### Second - Two
+### Second Two
 
 Description second two
 
@@ -42,7 +42,7 @@ Description second two
 $ 
 ```
 
-### Second - Three
+### Second Three
 
 Description second three
 
