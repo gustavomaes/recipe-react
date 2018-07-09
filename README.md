@@ -11,7 +11,7 @@ Application developed for study
 - [Developing](#developing)
 
 ## Demo
-You can see the demo **[here](https://gustavomaes-recipes.herokuapp.com).
+You can see the demo [here](https://gustavomaes-recipes.herokuapp.com).
 
   **Login Admin:**
   ```sh
