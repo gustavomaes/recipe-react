@@ -6,19 +6,26 @@ Subtitle
 
 ## Table of Contents
 
-- [1 First](#first)
+- [Technology](#technology)
 - [2 Second](#second)
 	- [2.1 Second - One](#second-one)
 	- [2.2 Second - Two](#second-two)
 	- [2.3 Second - Three](#second-three)
 
-## First
+## Technology
 
 Description technology list
 
-- **[Link](https://google.com)**.
-- **Description
-- **Description
+- **[Create React App](https://github.com/facebook/create-react-app)**
+- **[React](https://github.com/facebook/react)**
+- **[React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)**
+- **[Redux](https://github.com/reduxjs/redux)**
+- **[Redux-Saga](https://github.com/redux-saga/redux-saga)**
+- **[Reduxsauce](https://github.com/infinitered/reduxsauce)**
+- **[Semantic UI React](https://github.com/Semantic-Org/Semantic-UI-React)**
+- **[Axios](https://github.com/axios/axios)**
+- **[JWT Decode](https://github.com/auth0/jwt-decode)**
+
 
 ## Second
 
