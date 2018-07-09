@@ -37,7 +37,7 @@ Description second one
   $ git clone git@github.com:gustavomaes/recipe-react.git
   ```
 
-2. **Run **[server](https://github.com/gustavomaes/recipe-server):**
+2. **Run server:** **[server](https://github.com/gustavomaes/recipe-server)
   ```sh
   $ yarn start
   ```
