@@ -5,9 +5,26 @@ Application developed for study
 
 ## Table of Contents
 
+- [Demo](#demo)
 - [Technology](#technology)
 - [Dependency](#dependency)
 - [Developing](#developing)
+
+## Demo
+You can see the demo **[here](https://gustavomaes-recipes.herokuapp.com).
+
+  **Login Admin:**
+  ```sh
+  E-mail: admin@admin.com
+  Password: 123456
+  ```
+  
+  **Login User:**
+  ```sh
+  E-mail: user@user.com
+  Password: 123456
+  ```
+  
 
 ## Technology
 
