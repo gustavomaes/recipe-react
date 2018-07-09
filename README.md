@@ -7,10 +7,7 @@ Subtitle
 ## Table of Contents
 
 - [Technology](#technology)
-- [2 Second](#second)
-	- [2.1 Second - One](#second-one)
-	- [2.2 Second - Two](#second-two)
-	- [2.3 Second - Three](#second-three)
+- [Developing](#developing)
 
 ## Technology
 
@@ -27,7 +24,7 @@ Description technology list
 - **[JWT Decode](https://github.com/auth0/jwt-decode)**
 
 
-## Second
+## Developing
 
 Description second
 
@@ -35,9 +32,14 @@ Description second
 
 Description second one
 
-1. **Bold text:**
+1. **Clone the repository:**
   ```sh
-  $ git clone 
+  $ git clone git@github.com:gustavomaes/recipe-react.git
+  ```
+
+2. **Run **[server](https://github.com/gustavomaes/recipe-server):**
+  ```sh
+  $ yarn start
   ```
 
 ### Second Two
