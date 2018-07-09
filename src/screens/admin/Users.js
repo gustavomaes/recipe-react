@@ -39,6 +39,10 @@ class Users extends Component {
     render() {
         return (
             <Container>
+                { !this.props.users.data && <p>Carregando</p>}
+                { this.props.users.data && 
+                
+                <div>
 
                 <br />
                 <br />
@@ -57,6 +61,8 @@ class Users extends Component {
                         {this.props.users.data.map(this.renderUser)}
                     </Table.Body>
                 </Table>
+                </div>
+            }
             </Container>
 
         )

@@ -71,7 +71,6 @@ class MyAccount extends Component {
         if (this.props.user.saved) {
             this.setState({ saved: true })
             this.props.updateAuth(this.props.user.user)
-            console.log(this.props.user)
             this.props.reset()
         }
 
