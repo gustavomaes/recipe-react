@@ -15,15 +15,15 @@ Application developed for study
 You can see the demo [here](https://gustavomaes-recipes.herokuapp.com).
 
   ### Login
-  To use login:
+  To login use:
   
-  **Admin:**
+  **Admin**
   ```sh
   E-mail: admin@admin.com
   Password: 123456
   ```
   
-  **User:**
+  **User**
   ```sh
   E-mail: user@user.com
   Password: 123456
