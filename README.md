@@ -7,11 +7,10 @@ Subtitle
 ## Table of Contents
 
 - [Technology](#technology)
+- [Dependency](#dependency)
 - [Developing](#developing)
 
 ## Technology
-
-Description technology list
 
 - **[Create React App](https://github.com/facebook/create-react-app)**
 - **[React](https://github.com/facebook/react)**
@@ -23,39 +22,30 @@ Description technology list
 - **[Axios](https://github.com/axios/axios)**
 - **[JWT Decode](https://github.com/auth0/jwt-decode)**
 
+## Dependency
+
+- **[Recipes API](https://github.com/gustavomaes/recipe-server)**
+
 
 ## Developing
-
-Description second
-
-### Second One
-
-Description second one
 
 1. **Clone the repository:**
   ```sh
   $ git clone git@github.com:gustavomaes/recipe-react.git
   ```
+  
+2. **Install packages:**
+```sh
+$ yarn install
+```
 
-2. **Run [server](https://github.com/gustavomaes/recipe-server):**
+3. **Run [server](https://github.com/gustavomaes/recipe-server):**
   ```sh
   $ yarn start
   ```
-
-### Second Two
-
-Description second two
-
-1. **Bold text:**
+  
+4. **Run application:**
 ```sh
-$ 
+$ yarn start
 ```
-
-### Second Three
-
-Description second three
-
-- **Bold text:**
-  ```sh
-  $ 
-  ```
+  
